@@ -384,18 +384,19 @@ def main():
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
     )
+    # change to your path to the baseline models
     model1 = MBartForConditionalGeneration.from_pretrained(
-        "../../../../government_25k_si_LK-en_XX_model",
-        from_tf=bool(".ckpt" in "../../../../government_25k_si_LK-en_XX_model"),
+        "/home/xinpeng/scratch/fine-tuning/government_25k_si_LK-en_XX_model",
+        from_tf=bool(".ckpt" in "/home/xinpeng/scratch/fine-tuning/government_25k_si_LK-en_XX_model"),
         config=config,
         cache_dir=model_args.cache_dir,
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
     )
-
+    # change to your path to the baseline models
     model2 = MBartForConditionalGeneration.from_pretrained(
-        "../../../../government_25k_en_XX-ta_IN_model",
-        from_tf=bool(".ckpt" in "../../../../government_25k_en_XX-ta_IN_model"),
+        "/home/xinpeng/scratch/fine-tuning/government_25k_en_XX-ta_IN_model",
+        from_tf=bool(".ckpt" in "/home/xinpeng/scratch/fine-tuning/government_25k_en_XX-ta_IN_model"),
         config=config,
         cache_dir=model_args.cache_dir,
         revision=model_args.model_revision,
