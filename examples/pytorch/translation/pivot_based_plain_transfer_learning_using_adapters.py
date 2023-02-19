@@ -432,8 +432,11 @@ def main():
                                        leave_out=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
                                        load_as=selected_adapter_for_the_decoder[-5:])
                     model.train_adapter([selected_adapter_for_the_encoder[-5:], selected_adapter_for_the_decoder[-5:]])
-                    model.set_active_adapters(
-                        [selected_adapter_for_the_encoder[-5:], selected_adapter_for_the_decoder[-5:]])
+                    # model.set_active_adapters(
+                    #     [selected_adapter_for_the_encoder[-5:], selected_adapter_for_the_decoder[-5:]])
+                    # todo: ?
+                    model.set_active_adapters([selected_adapter_for_the_encoder[-5:]])
+                    model.set_active_adapters([selected_adapter_for_the_decoder[-5:]])
                 else:
                     model.load_adapter(
                         adapter_args.load_adapter,

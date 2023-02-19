@@ -433,8 +433,11 @@ def main():
                     # Freeze all model weights except of those of this adapter layers in decoder of the target side
                     model.train_adapter(["target_decoder"])
                     # Set the adapters to be used in every forward pass
-                    model.set_active_adapters(
-                        ["frozen_pivot_encoder", "target_decoder"])
+                    # model.set_active_adapters(
+                    #     ["frozen_pivot_encoder", "target_decoder"])
+                    # todo: ?
+                    model.set_active_adapters(["frozen_pivot_encoder"])
+                    model.set_active_adapters(["target_decoder"])
                 else:
                     model.load_adapter(
                         adapter_args.load_adapter,
