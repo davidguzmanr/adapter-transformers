@@ -65,7 +65,7 @@ logger = logging.getLogger(__name__)
 # A list of all multilingual tokenizer which require src_lang and tgt_lang attributes.
 MULTILINGUAL_TOKENIZERS = [MBartTokenizer, MBartTokenizerFast, MBart50Tokenizer, MBart50TokenizerFast, M2M100Tokenizer]
 
-
+os.environ["WANDB_DISABLED"] = "true"
 @dataclass
 class ModelArguments:
     """
@@ -418,9 +418,9 @@ def main():
             )
             # load a pre-trained from Hub if specified
             if adapter_args.load_adapter:
-                pivot_based_plain_transfer_learning_using_adapters = adapter_args.load_adapter.split("-")
-                if pivot_based_plain_transfer_learning_using_adapters[
-                    0] == "pivot_based_plain_transfer_learning_using_adapters":
+                pivot_based_plain_transfer_learning_using_adapters = adapter_args.load_adapter.split("-", 1)
+                if pivot_based_plain_transfer_learning_using_adapters[0] == \
+                        "pivot_based_plain_transfer_learning_using_adapters":
                     selected_adapters = pivot_based_plain_transfer_learning_using_adapters[1][1:-1].split(",")
                     selected_adapter_for_the_encoder = selected_adapters[0]
                     selected_adapter_for_the_decoder = selected_adapters[1]
@@ -432,11 +432,8 @@ def main():
                                        leave_out=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
                                        load_as=selected_adapter_for_the_decoder[-5:])
                     model.train_adapter([selected_adapter_for_the_encoder[-5:], selected_adapter_for_the_decoder[-5:]])
-                    # model.set_active_adapters(
-                    #     [selected_adapter_for_the_encoder[-5:], selected_adapter_for_the_decoder[-5:]])
-                    # todo: ?
-                    model.set_active_adapters([selected_adapter_for_the_encoder[-5:]])
-                    model.set_active_adapters([selected_adapter_for_the_decoder[-5:]])
+                    model.set_active_adapters(
+                        [selected_adapter_for_the_encoder[-5:], selected_adapter_for_the_decoder[-5:]])
                 else:
                     model.load_adapter(
                         adapter_args.load_adapter,
