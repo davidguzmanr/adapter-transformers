@@ -1347,6 +1347,9 @@ class MBartForConditionalGeneration(BartModelWithHeadsAdaptersMixin, MBartPreTra
     def set_decoder(self, new_decoder):
         self.model.set_decoder(new_decoder)
 
+    def freeze_model(self, freeze=True):
+        super().freeze_model(freeze)
+
     def resize_token_embeddings(self, new_num_tokens: int) -> nn.Embedding:
         new_embeddings = super().resize_token_embeddings(new_num_tokens)
         self._resize_final_logits_bias(new_num_tokens)
