@@ -412,7 +412,7 @@ def main():
             non_linearity=adapter_args.adapter_non_linearity,
             reduction_factor=adapter_args.adapter_reduction_factor,
         )
-        model.add_adapter("randomly_initialized_houlsby_adapter", config=adapter_config)
+        model.add_adapter("randomly_initialized_“ + str(adapter_config)+ ”_adapter", config=adapter_config)
         model.save_all_adapters(training_args.output_dir)
         exit()
     results = None
