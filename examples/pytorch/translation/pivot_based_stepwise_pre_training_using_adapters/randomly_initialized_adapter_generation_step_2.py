@@ -416,7 +416,7 @@ def main():
             model.load_adapter(
                 adapter_args.load_adapter,
                 config=adapter_config,
-                load_as="randomly_initialized_houlsby_adapter_decoder",
+                load_as="randomly_initialized_adapter_decoder",
                 leave_out=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             )
             model.save_all_adapters(training_args.output_dir)
