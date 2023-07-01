@@ -71,7 +71,12 @@ class ModelArguments:
     """
     Arguments pertaining to which model/config/tokenizer we are going to fine-tune from.
     """
-
+    from_pretrained_encoder: str = field(
+        metadata={"help": "Path to pretrained model encoder"}
+    )
+    from_pretrained_decoder: str = field(
+        metadata={"help": "Path to pretrained model decoder"}
+    )
     model_name_or_path: str = field(
         metadata={"help": "Path to pretrained model or model identifier from huggingface.co/models"}
     )
@@ -101,12 +106,6 @@ class ModelArguments:
                 "with private models)."
             )
         },
-    )
-    from_pretrained_encoder: str = field(
-        metadata={"help": "Path to pretrained model encoder"}
-    )
-    from_pretrained_decoder: str = field(
-        metadata={"help": "Path to pretrained model decoder"}
     )
 
 
